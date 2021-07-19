@@ -1,6 +1,6 @@
-const Button = () => {
+const Button = ({setComment}) => {
  return (
-  <button>
+  <button onClick={() => setComment('')}>
    Add Comment
   </button>
  )

@@ -1,17 +1,24 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from '../App';
+import { shallow } from 'enzyme'
+import App from 'components/App';
+import CommentBox from 'components/CommentBox';
+import CommentList from 'components/CommentList';
 
-it('shows a heading string', () => {
- // create a fake dom
- const div = document.createElement('div');
+let wrapped;
 
- ReactDOM.render(<App />, div);
- // Looks inside of div
- // to know if the data is there
- 
- expect(div.innerHTML).toContain('Comment Box');
- expect(div.innerHTML).toContain('Comment List');
-
- ReactDOM.unmountComponentAtNode(div);
+beforeEach( () => {
+ wrapped = shallow(<App />);
 });
+
+afterEach(() => {
+ wrapped.unmount();
+});
+
+it('shows a Comment Box', () => {
+ expect(wrapped.find(CommentBox).length).toEqual(1);
+});
+
+it('shows a Comment List', () => {
+ expect(wrapped.find(CommentList).length).toEqual(1);
+});
+
