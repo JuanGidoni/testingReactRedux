@@ -21,4 +21,3 @@ it('shows a Comment Box', () => {
 it('shows a Comment List', () => {
  expect(wrapped.find(CommentList).length).toEqual(1);
 });
-
