@@ -3,14 +3,19 @@ import {
  mount
 } from 'enzyme';
 import CommentBox from 'components/CommentBox';
+import Root from 'root';
 
 let wrapped;
 const list = [];
 const setList = jest.fn()
-.mockReturnValueOnce([list, {}])
+ .mockReturnValueOnce([list, {}])
 
 beforeEach(() => {
- wrapped = mount( <CommentBox setList={setList} list={list} /> );
+ wrapped = mount(
+  <Root>
+   <CommentBox setList={setList} list={list} />
+  </Root>
+ );
 });
 
 afterEach(() => {
@@ -37,9 +42,9 @@ describe('Actions: textarea and submit/clear list', () => {
  });
 
  it('form submit: add comment to list and clear textarea', () => {
- 
+
   wrapped.find('form').simulate('submit', {
-   list: [...list, {comment: 'new comment'}]
+   list: [...list, { comment: 'new comment' }]
   });
   wrapped.update();
   expect(wrapped.find('textarea').prop('value')).toEqual('');
